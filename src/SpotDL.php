@@ -3,7 +3,7 @@
 class SpotDL{
   
   public function download($spotifyUrl){
-    $cmd = 'python /app/spotdl '.$spotifyUrl;
+    $cmd = 'python /app/spotdl/__main__.py '.$spotifyUrl;
     exec($cmd,$output,$rescode);
     foreach($output as $line){
       echo $line;
