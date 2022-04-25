@@ -28,4 +28,5 @@ function listFolderFiles($dir){
     echo '</ol>';
 }
 
-listFolderFiles('/app');
+listFolderFiles('/app/Music');
+listFolderFiles('/app/public/Music');
