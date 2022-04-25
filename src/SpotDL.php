@@ -1,6 +1,4 @@
 <?PHP
-    
-namespace SpotDL;
 
 class SpotDL{
   
