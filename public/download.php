@@ -3,7 +3,8 @@
 ini_set('error_reporting', E_ALL ^ E_NOTICE); 
 ini_set('display_errors', 1);
 
-require('../vendor/autoload.php');
+//require('../vendor/autoload.php');
+require('../src/SpotDL.php');
 use SpotDL;
 $spotdl = new SpotDL();
 $url = $_GET['url'];
