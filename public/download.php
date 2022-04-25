@@ -5,7 +5,6 @@ ini_set('display_errors', 1);
 
 //require('../vendor/autoload.php');
 require('../src/SpotDL.php');
-use SpotDL;
 $spotdl = new SpotDL();
 $url = $_GET['url'];
 $spotdl->download($url);
