@@ -8,6 +8,7 @@ class SpotDL{
     foreach($output as $line){
       echo $line;
     }
+    echo $rescode;
   }
 
 }
