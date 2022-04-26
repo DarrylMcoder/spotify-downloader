@@ -13,7 +13,7 @@ class SpotDL{
   }
 
   private function parseMusicName($str){
-    preg_match('#Searching YouTube music for \"(.*?)\"#i',$str,$res);
+    preg_match('#Searching YouTube music for "(.*?)"#i',$str,$res);
     $name = $res[1][0].'.mp3';
     return $name;
   }
