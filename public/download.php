@@ -7,7 +7,10 @@ ini_set('display_errors', 1);
 require('../src/SpotDL.php');
 $spotdl = new SpotDL();
 $url = $_GET['url'];
-$spotdl->download($url);
+$filename = $spotdl->download($url);
+header('Location: '.$filename);
+
+
 
 function listFolderFiles($dir){
     $ffs = scandir($dir);
@@ -28,6 +31,3 @@ function listFolderFiles($dir){
     echo '</ol>';
 }
 
-listFolderFiles('/app');
-listFolderFiles('/app/Music');
-listFolderFiles('/app/public/Music');
