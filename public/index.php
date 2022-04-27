@@ -15,7 +15,9 @@ $c = curl_init($url);
 curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
-$json = json_decode(curl_exec($c), true);
+$res = curl_exec($c);
+echo $res;
+$json = json_decode($res, true);
 
 
 ?>
