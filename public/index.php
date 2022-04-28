@@ -6,7 +6,7 @@ $q = $_GET['q'];
 $type = isset($_GET['type']) ? $_GET['type'] : 'track';
 
 $url = 'https://api.spotify.com/v1/search?q='. $q .'&type='. $type .'&market=ES&limit=10';
-$access_token = getenv('SPOTIFY_ACCESS_TOKEN');
+$access_token = get_access_token();
 $headers = [
   "Accept: application/json",
   "Authorization: Bearer $access_token"
@@ -20,11 +20,8 @@ curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
 $res = curl_exec($c);
 echo $res;
 $json = json_decode($res, true);
-if($json['error']['status'] === 401){
-  refresh_access_token();
-}
 
-function refresh_access_token(){
+function get_access_token(){
   $url = 'https://accounts.spotify.com/api/token';
   $postdata = 'grant_type=client_credentials';
   $headers = [
@@ -40,7 +37,7 @@ function refresh_access_token(){
   echo $res;
   $json = json_decode($res, true);
   $access_token = $json['access_token'];
-  putenv("SPOTIFY_ACCESS_TOKEN=$access_token");
+  return $access_token;
 }
 
 ?>
