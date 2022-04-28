@@ -11,6 +11,8 @@ $headers = [
   "Accept: application/json",
   "Authorization: Bearer $access_token"
 ];
+var_dump($headers);
+var_dump($url);
 $c = curl_init($url);
 curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
