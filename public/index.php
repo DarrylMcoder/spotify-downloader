@@ -67,8 +67,8 @@ function get_access_token(){
     </style>
     <link rel="stylesheet" href="http://dstatic.darrylmcoder.com/assets/style.css">
     <script src="http://dstatic.darrylmcoder.com/assets/script.js"> </script>
-    <script type="text/javascript">
-    loadLinks('http://dstatic.darrylmcoder.com/assets/links.json','myOverlay');
+    <script>
+      loadLinks('http://dstatic.darrylmcoder.com/assets/links.json','myOverlay');
     </script>
   </head>
   <body>
