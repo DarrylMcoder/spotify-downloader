@@ -27,7 +27,7 @@ function refresh_access_token(){
   $postdata = 'grant_type=client_credentials';
   $headers = [
     "Content-Type: application/x-www-form-urlencoded",
-    "Authorization: Basic ZmYwM2I5YjM5MWEwNGVlYWI4YzFmYWI3YWQ1NTUwZTM6MjE5OTMxZTY5MjM5NGI0Yjk4ZjVlZDBhNDY3ODViZmE=";
+    "Authorization: Basic ZmYwM2I5YjM5MWEwNGVlYWI4YzFmYWI3YWQ1NTUwZTM6MjE5OTMxZTY5MjM5NGI0Yjk4ZjVlZDBhNDY3ODViZmE="
   ];
   $c = curl_init($url);
   curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
