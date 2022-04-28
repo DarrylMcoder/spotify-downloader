@@ -31,7 +31,7 @@ function refresh_access_token(){
   ];
   $c = curl_init($url);
   curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-  curl_setopt($c, CURLOPT_HTTPHEADER, $headers):
+  curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
   curl_setopt($c, CURLOPT_POST, true);
   curl_setopt($c, CURLOPT_POSTFIELDS, $postdata);
   $res = curl_exec($c);
