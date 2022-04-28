@@ -60,6 +60,10 @@ function get_access_token(){
         padding: 0;
         font: Arial 14px;
       }
+      .img{
+        margin-top:20px;
+        border: solid black 1px;
+      }
     </style>
     <link rel="stylesheet" href="http://dstatic.darrylmcoder.com/assets/style.css">
     <script src="http://dstatic.darrylmcoder.com/assets/script.js"> </script>
@@ -74,13 +78,13 @@ function get_access_token(){
         Music Downloader
       </div><br>
       <form action="" method="get">
-        <input type="text" class="input" name="q">
+        <input type="text" class="input" name="q" value="<?=$q?>">
         <button type="submit" class="go">
           Search
         </button>
       </form>
       <h3>
-        <?php echo isset($q) ? 'Search results for "'. $q .'"' : ''; ?>
+        <?php echo isset($q) ? 'Search results for '. $q : ''; ?>
         <hr><hr>
       </h3>
 <?php
@@ -88,7 +92,7 @@ function get_access_token(){
 if(isset($q)){
 foreach($json['tracks']['items'] as $item){
   echo '<div class="opts">';
-    echo '<img width="'. $item['album']['images'][1]['width'] .'" height="'. $item['album']['images'][1]['height'] .'" src="'. $item['album']['images'][1]['url'] .'">';
+    echo '<img class="img" width="250" height="250" src="'. $item['album']['images'][1]['url'] .'">';
     echo '<p>'. $item['name'] .'</p>';
     if(isset($item['preview_url'])){
       echo '<audio controls>';
