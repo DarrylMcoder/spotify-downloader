@@ -6,10 +6,10 @@ $q = $_GET['q'];
 $type = isset($_GET['type']) ? $_GET['type'] : 'track';
 
 $url = 'https://api.spotify.com/v1/search?q='. $q .'&type='. $type .'&market=ES&limit=10';
+$access_token = getenv('SPOTIFY_ACCESS_TOKEN');
 $headers = [
   "Accept: application/json",
-  "Content-Type: application/json",
-  "Authorization: Bearer BQBEg3aowI3HVyA0B8OLT6Z7_ubDHqG0je5pMRkYfWQC0XnR1XwMSkJUblorFfxqHu4S12fSApTtdGAfZNRmgbVy3_-jEdkXs1debVKQLv80Aq1dOIP0Q-tnzuKqsbcXiyVcLZ3UqTHgjT6kb0_0Eea3MjCp-CptaHI"
+  "Authorization: Bearer $access_token"
 ];
 $c = curl_init($url);
 curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
@@ -18,7 +18,28 @@ curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
 $res = curl_exec($c);
 echo $res;
 $json = json_decode($res, true);
+if($json['error']['status'] === 401){
+  refresh_access_token();
+}
 
+function refresh_access_token(){
+  $url = 'https://accounts.spotify.com/api/token';
+  $postdata = 'grant_type=client_credentials';
+  $headers = [
+    "Content-Type: application/x-www-form-urlencoded",
+    "Authorization: Basic ZmYwM2I5YjM5MWEwNGVlYWI4YzFmYWI3YWQ1NTUwZTM6MjE5OTMxZTY5MjM5NGI0Yjk4ZjVlZDBhNDY3ODViZmE=";
+  ];
+  $c = curl_init($url);
+  curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($c, CURLOPT_HTTPHEADER, $headers):
+  curl_setopt($c, CURLOPT_POST, true);
+  curl_setopt($c, CURLOPT_POSTFIELDS, $postdata);
+  $res = curl_exec($c);
+  echo $res;
+  $json = json_decode($res, true);
+  $access_token = $json['access_token'];
+  putenv("SPOTIFY_ACCESS_TOKEN=$access_token");
+}
 
 ?>
 
