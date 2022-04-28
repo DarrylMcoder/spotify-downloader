@@ -3,12 +3,9 @@
 class SpotDL{
   
   public function download($spotifyUrl){
+    $spotifyUurl = escapeshellcmd($spotifyUrl);
     $cmd = 'python /app/spotdl/__main__.py '.$spotifyUrl.' 2>&1';
-    echo $cmd;
     exec($cmd,$output,$rescode);
-    foreach($output as $line){
-      echo $line.'\n';
-    }
     return $this->parseMusicName($output[1]);
   }
 
