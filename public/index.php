@@ -2,7 +2,7 @@
 
 ini_set('error_reporting', E_ALL ^ E_NOTICE); 
 ini_set('display_errors', 1);
-$q = isset($_GET['q'] ? urlencode($_GET['q']) : null;
+$q = isset($_GET['q']) ? urlencode($_GET['q']) : null;
 $type = 'track';
 
 $url = 'https://api.spotify.com/v1/search?q='. $q .'&type='. $type .'&market=ES&limit=10';
