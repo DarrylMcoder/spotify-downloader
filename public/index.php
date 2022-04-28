@@ -2,8 +2,8 @@
 
 ini_set('error_reporting', E_ALL ^ E_NOTICE); 
 ini_set('display_errors', 1);
-$q = $_GET['q'];
-$type = isset($_GET['type']) ? $_GET['type'] : 'track';
+$q = isset($_GET['q'] ? urlencode($_GET['q']) : null;
+$type = 'track';
 
 $url = 'https://api.spotify.com/v1/search?q='. $q .'&type='. $type .'&market=ES&limit=10';
 $access_token = get_access_token();
@@ -18,7 +18,6 @@ curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($c, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($c, CURLOPT_FOLLOWLOCATION, true);
 $res = curl_exec($c);
-echo $res;
 $json = json_decode($res, true);
 
 function get_access_token(){
@@ -34,7 +33,6 @@ function get_access_token(){
   curl_setopt($c, CURLOPT_POST, true);
   curl_setopt($c, CURLOPT_POSTFIELDS, $postdata);
   $res = curl_exec($c);
-  echo $res;
   $json = json_decode($res, true);
   $access_token = $json['access_token'];
   return $access_token;
@@ -83,7 +81,7 @@ function get_access_token(){
 if(isset($q)){
 foreach($json['tracks']['items'] as $item){
   echo '<div class="opts">';
-    echo '<img width="100%" src="'. $item['album']['images'][2] .'">';
+    echo '<img width="'. $item['album']['images'][2]['width'] .'" height="'. $item['album']['images'][2]['height'] .'" src="'. $item['album']['images'][2]['url'] .'">';
     echo '<p>'. $item['name'] .'</p>';
     if(isset($item['preview_url'])){
       echo '<audio controls>';
