@@ -22,7 +22,7 @@ class SpotDL{
     unlink('names.txt');
     file_put_contents('names.txt', 'file \'watermark.mp3\''. PHP_EOL .'file \''. $infile .'\'');
     rename($filename, $infile);
-    $cmd = 'ffmpeg -f concat -i names.txt -c copy "'. $filename .'" 2>&1';
+    $cmd = 'ffmpeg -f concat -safe 0 -i names.txt -c copy "'. $filename .'" 2>&1';
     echo $cmd;
     exec($cmd, $output, $rescode);
     var_dump($output);
