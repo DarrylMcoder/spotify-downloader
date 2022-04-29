@@ -18,7 +18,7 @@ class SpotDL{
   
   public function watermark($filename){
     $filename = escapeshellcmd($filename);
-    $filename = str_replace(" ", "\\ ", $filename);
+    $filename = str_replace(" ", "\ ", $filename);
     $tempfile = '_'. $filename;
     unlink('names.txt');
     file_put_contents('names.txt', 'file \'watermark.mp3\''. PHP_EOL .'file \''. $filename .'\'');
