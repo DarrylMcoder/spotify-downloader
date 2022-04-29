@@ -18,9 +18,11 @@ class SpotDL{
   
   public function watermark($filename){
     $filename = escapeshellcmd($filename);
-    $infile = 'temp_'. urlencode($filename);
+    $infile = 'temp_'. $filename;
+    unlink('names.txt');
+    file_put_contents('names.txt', 'file "watermark.mp3\nfile "'. $infile .'"');
     rename($filename, $infile);
-    $cmd = 'ffmpeg -i "concat:watermark.mp3|'. $infile .'" -i '. $infile .' -acodec copy "'. $filename .'" -map_metadata 0:1 2>&1';
+    $cmd = 'ffmpeg -f concat -i names.txt -c copy "'. $filename .'"';
     echo $cmd;
     exec($cmd, $output, $rescode);
     var_dump($output);
