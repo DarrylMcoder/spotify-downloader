@@ -20,7 +20,7 @@ class SpotDL{
     $filename = escapeshellcmd($filename);
     $infile = 'temp_'. $filename;
     unlink('names.txt');
-    file_put_contents('names.txt', 'file watermark.mp3'. PHP_EOL .'file "'. $infile .'"');
+    file_put_contents('names.txt', 'file \'watermark.mp3\''. PHP_EOL .'file \''. $infile .'\'');
     rename($filename, $infile);
     $cmd = 'ffmpeg -f concat -i names.txt -c copy "'. $filename .'" 2>&1';
     echo $cmd;
