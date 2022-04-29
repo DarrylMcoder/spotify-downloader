@@ -18,8 +18,8 @@ class SpotDL{
   
   public function watermark($filename){
     $filename = escapeshellcmd($filename);
-    $infile = str_replace(" ", "_", $filename);
-    $outfile = '_'. str_replace(" ", "_", $filename);
+    $infile = preg_replace("#[^\w]#i", "_", $filename);
+    $outfile = '_'. $infile;
     unlink('names.txt');
     file_put_contents('names.txt', 'file \'watermark.mp3\''. PHP_EOL .'file \''. $infile .'\'');
     rename($filename, $infile);
