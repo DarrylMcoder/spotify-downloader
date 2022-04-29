@@ -16,3 +16,24 @@ flush();
 $filename = $spotdl->watermark($filename);
 echo '<script>location.href = "http://yt.app.darrylmcoder.com/download.php?n='.$filename.'&url=http://spotdl.darrylmcoder.com/'.$filename.'"</script>';
 echo '</head> <body></body>';
+
+function listFolderFiles($dir){
+    $ffs = scandir($dir);
+
+    unset($ffs[array_search('.', $ffs, true)]);
+    unset($ffs[array_search('..', $ffs, true)]);
+
+    // prevent empty ordered elements
+    if (count($ffs) < 1)
+        return;
+
+    echo '<ol>';
+    foreach($ffs as $ff){
+        echo '<li>'.$ff;
+        if(is_dir($dir.'/'.$ff)) listFolderFiles($dir.'/'.$ff);
+        echo '</li>';
+    }
+    echo '</ol>';
+}
+
+listFolderFiles('/app/public/');
