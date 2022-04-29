@@ -20,8 +20,11 @@ class SpotDL{
     $filename = escapeshellcmd($filename);
     $infile = 'temp_'. urlencode($filename);
     rename($filename, $infile);
-    $cmd = 'ffmpeg -i "concat:watermark.mp3|'. $infile .'" -i '. $infile .' -acodec copy '. $filename .' -map_metadata 0:1';
+    $cmd = 'ffmpeg -i "concat:watermark.mp3|'. $infile .'" -i '. $infile .' -acodec copy '. $filename .' -map_metadata 0:1 2>&1';
+    echo $cmd;
     exec($cmd, $output, $rescode);
+    var_dump($output);
+    echo $rescode;
     return $filename;
   }
 }
