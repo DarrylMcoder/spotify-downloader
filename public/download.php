@@ -8,11 +8,4 @@ require('../src/SpotDL.php');
 $spotdl = new SpotDL();
 $url = $_GET['url'];
 $filename = $spotdl->download($url);
-header("Content-disposition: attachment; filename=$filename");
-header("Content-type: audio/mpeg");
-$fp = fopen($filename,'rb');
-while (!feof($fp)) {
-  echo fread($fp, 8192);
-  flush();
-}
-fclose($fp);
+header("Location: yt.app.darrylmcoder.com/download.php?url=$filename");
