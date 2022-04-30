@@ -25,7 +25,9 @@ class SpotDL{
     rename($filename, $infile);
    // $cmd = 'ffmpeg -f concat -safe 0 -i names.txt -c copy "'. $tempfile .'" 2>&1';
 
-    $cmd = 'ffmpeg -f concat -i names.txt -i \''. $infile .'\' -map_metadata 0:1 -id3v2_version 3 -write_id3v1 1 -c:a copy "'. $outfile .'" 2>&1';
+   // $cmd = 'ffmpeg -f concat -i names.txt -i \''. $infile .'\' -map_metadata 0:1 -id3v2_version 3 -write_id3v1 1 -c:a copy "'. $outfile .'" 2>&1';
+    
+    $cmd = "ffmpeg -i watermark.mp3 -i $infile $outfile 2>&1"
     echo $cmd;
     exec($cmd, $output, $rescode);
     rename($outfile, $filename);
