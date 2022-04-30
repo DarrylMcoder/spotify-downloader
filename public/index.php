@@ -99,7 +99,7 @@ if(isset($q)){
 foreach($json['tracks']['items'] as $item){
   echo '<div class="opts">';
     echo '<img class="img" width="250" height="250" src="'. $item['album']['images'][1]['url'] .'">';
-    echo '<p>'. $item['artists'][0] .' - '. $item['name'] .'</p>';
+    echo '<p>'. $item['artists'][0]['name'] .' - '. $item['name'] .'</p>';
     if(isset($item['preview_url'])){
       echo '<audio controls>';
         echo '<source src="'. $item['preview_url'] .'" type="audio/mpeg">';
