@@ -8,4 +8,4 @@ require('../src/SpotDL.php');
 $spotdl = new SpotDL();
 $url = $_GET['url'];
 $filename = $spotdl->download($url);
-header("Location: yt.app.darrylmcoder.com/download.php?url=$filename");
+header("Location: yt.app.darrylmcoder.com/download.php?n=$filename&url=http://spotdl.darrylmcoder.com/$filename");
