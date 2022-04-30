@@ -7,33 +7,12 @@ ini_set('display_errors', 1);
 require('../src/SpotDL.php');
 $spotdl = new SpotDL();
 $url = $_GET['url'];
-echo '<!doctype html>';
-echo '<head>';
-flush();
 $filename = $spotdl->download($url);
-echo '<meta charset="utf-8">';
-flush();
-$filename = $spotdl->watermark($filename);
-echo '<script>location.href = "http://yt.app.darrylmcoder.com/download.php?n='.$filename.'&url=http://spotdl.darrylmcoder.com/'.$filename.'"</script>';
-echo '</head> <body></body>';
-
-function listFolderFiles($dir){
-    $ffs = scandir($dir);
-
-    unset($ffs[array_search('.', $ffs, true)]);
-    unset($ffs[array_search('..', $ffs, true)]);
-
-    // prevent empty ordered elements
-    if (count($ffs) < 1)
-        return;
-
-    echo '<ol>';
-    foreach($ffs as $ff){
-        echo '<li>'.$ff;
-        if(is_dir($dir.'/'.$ff)) listFolderFiles($dir.'/'.$ff);
-        echo '</li>';
-    }
-    echo '</ol>';
+header("Content-disposition: attachment; filename=$filename");
+header("Content-type: audio/mpeg");
+$fp = fopen($filename);
+while (!feof($fp)) {
+  echo fread($fp, 8192);
+  flush();
 }
-
-listFolderFiles('/app/public/');
+fclose($fp);
