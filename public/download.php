@@ -10,7 +10,7 @@ $url = $_GET['url'];
 $filename = $spotdl->download($url);
 header("Content-disposition: attachment; filename=$filename");
 header("Content-type: audio/mpeg");
-$fp = fopen($filename);
+$fp = fopen($filename,'rb');
 while (!feof($fp)) {
   echo fread($fp, 8192);
   flush();
