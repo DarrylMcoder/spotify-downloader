@@ -77,8 +77,14 @@ function get_access_token(){
       <div class="pagetitle">
         Music Downloader
       </div><br>
+      
       <form action="" method="get">
-        <input type="text" class="input" name="q" value="<?=$q?>">
+        <label for="q">
+          <h3>
+            Search for any song on Spotify.
+          </h3>
+        </label>
+        <input type="text" class="input" placeholder="Search for a song..." name="q" value="<?=$q?>">
         <button type="submit" class="go">
           Search
         </button>
