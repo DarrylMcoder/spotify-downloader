@@ -21,7 +21,7 @@ class SpotDL{
     $infile = preg_replace("#[^\w]#i", "_", $filename) .'.mp3';
     $outfile = '_'. $infile;
     unlink('names.txt');
-    file_put_contents('names.txt', 'file \'watermark.mp3\''. PHP_EOL .'file \''. $infile .'\'');
+    file_put_contents('names.txt', 'file \''.  $infile.'\''. PHP_EOL .'file \''. $infile .'\'');
     rename($filename, $infile);
    // $cmd = 'ffmpeg -f concat -safe 0 -i names.txt -c copy "'. $tempfile .'" 2>&1';
 
