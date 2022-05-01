@@ -19,6 +19,6 @@ flush();
 include('./config.php');
 $sql = "INSERT INTO songs(artist, name, url, img_url, preview_url, downloads, timestamp) VALUES(?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE downloads = downloads + 1, timestamp = ?";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_params('sssssiii',$artist, $name, $url, $img_url, $preview_url, $downloads, $timestamp, $timestamp);
+$stmt->bind_param('sssssiii',$artist, $name, $url, $img_url, $preview_url, $downloads, $timestamp, $timestamp);
 $stmt->execute();
 echo $mysqli->error;

@@ -68,7 +68,7 @@ function get_access_token(){
     <link rel="stylesheet" href="http://dstatic.darrylmcoder.com/assets/style.css">
     <script src="http://dstatic.darrylmcoder.com/assets/script.js"> </script>
     <script>
-      loadLinks('http://dstatic.darrylmcoder.com/assets/links.json','myOverlay');
+      
     </script>
   </head>
   <body>
@@ -104,7 +104,7 @@ foreach($json['tracks']['items'] as $item){
   $artists = trim($artists, ', ');
   $name = $artists .' - '. $item['name'];
   $img_url = $item['album']['images'][1]['url'];
-  $preview_url = $item['preview_url'];
+  $preview_url = isset($item['preview_url']) ? $item['preview_url'] : '';
   $url = $item['external_urls']['spotify'];
   echo '<div class="opts">';
     echo '<img class="img" width="250" height="250" src="'. $img_url .'">';
