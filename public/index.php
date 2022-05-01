@@ -101,11 +101,11 @@ foreach($json['tracks']['items'] as $item){
   foreach($item['artists'] as $artist){
     $artists .= $artist['name'] . ', ';
   }
-  $artists = urlencode(trim($artists, ', '));
-  $name = urlencode($artists .' - '. $item['name']);
-  $img_url = urlencode($item['album']['images'][1]['url']);
-  $preview_url = urlencode($item['preview_url']);
-  $url = urlencode($item['external_urls']['spotify']);
+  $artists = trim($artists, ', ');
+  $name = $artists .' - '. $item['name'];
+  $img_url = $item['album']['images'][1]['url'];
+  $preview_url = $item['preview_url'];
+  $url = $item['external_urls']['spotify'];
   echo '<div class="opts">';
     echo '<img class="img" width="250" height="250" src="'. $img_url .'">';
     echo '<p>'. $name .'</p>';
@@ -114,7 +114,7 @@ foreach($json['tracks']['items'] as $item){
         echo '<source src="'. $preview_url .'" type="audio/mpeg">';
       echo '</audio>';
     }
-    echo "<a href=\"download.php?name=$url&url=$url&img_url=$img_url&preview_url=$preview_url\">";
+    echo "<a href=\"download.php?name=". urlencode($url)."&url=". urlencode($url)."&img_url=". urlencode($img_url)."&preview_url=". urlencode($preview_url)."\">";
       echo '<button class="go">';
       echo 'Download';
       echo '</button>';
