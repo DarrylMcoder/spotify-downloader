@@ -114,7 +114,7 @@ foreach($json['tracks']['items'] as $item){
         echo '<source src="'. $preview_url .'" type="audio/mpeg">';
       echo '</audio>';
     }
-    echo "<a href=\"download.php?name=". urlencode($url)."&url=". urlencode($url)."&img_url=". urlencode($img_url)."&preview_url=". urlencode($preview_url)."\">";
+    echo "<a href=\"download.php?name=". urlencode($name)."&url=". urlencode($url)."&img_url=". urlencode($img_url)."&preview_url=". urlencode($preview_url)."\">";
       echo '<button class="go">';
       echo 'Download';
       echo '</button>';
