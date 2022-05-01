@@ -97,14 +97,15 @@ function get_access_token(){
 
 if(isset($q)){
 foreach($json['tracks']['items'] as $item){
+  $artists = '';
   foreach($item['artists'] as $artist){
     $artists .= $artist['name'] . ', ';
   }
-  $artists = trim($artists, ', ');
-  $name = $artists .' - '. $item['name'];
-  $img_url = $item['album']['images'][1]['url'];
-  $preview_url = $item['preview_url'];
-  $url = $item['external_urls']['spotify'];
+  $artists = urlencode(trim($artists, ', '));
+  $name = urlencode($artists .' - '. $item['name']);
+  $img_url = urlencode($item['album']['images'][1]['url']);
+  $preview_url = urlencode($item['preview_url']);
+  $url = urlencode($item['external_urls']['spotify']);
   echo '<div class="opts">';
     echo '<img class="img" width="250" height="250" src="'. $img_url .'">';
     echo '<p>'. $name .'</p>';

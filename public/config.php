@@ -1,7 +1,7 @@
 <?PHP
     
 $db = parse_url(getenv('JAWSDB_URL'));
-$mysqli = new mysqli($db['host'], $db['user'], $db['pass'], $db['path']);
+$mysqli = new mysqli($db['host'], $db['user'], $db['pass'], trim($db['path'], ' /'));
 
 // Check connection
 if($mysqli === false){
