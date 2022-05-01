@@ -97,15 +97,23 @@ function get_access_token(){
 
 if(isset($q)){
 foreach($json['tracks']['items'] as $item){
+  foreach($item['artists'] as $artist){
+    $artists .= $artist['name'] . ', ';
+  }
+  $artists = trim($artists, ', ');
+  $name = $artists .' - '. $item['name'];
+  $img_url = $item['album']['images'][1]['url'];
+  $preview_url = $item['preview_url'];
+  $url = $item['external_urls']['spotify'];
   echo '<div class="opts">';
-    echo '<img class="img" width="250" height="250" src="'. $item['album']['images'][1]['url'] .'">';
-    echo '<p>'. $item['artists'][0]['name'] .' - '. $item['name'] .'</p>';
-    if(isset($item['preview_url'])){
+    echo '<img class="img" width="250" height="250" src="'. $img_url .'">';
+    echo '<p>'. $name .'</p>';
+    if(isset($preview_url)){
       echo '<audio controls>';
-        echo '<source src="'. $item['preview_url'] .'" type="audio/mpeg">';
+        echo '<source src="'. $preview_url .'" type="audio/mpeg">';
       echo '</audio>';
     }
-    echo '<a href="download.php?url='. $item['external_urls']['spotify'] .'">';
+    echo "<a href=\"download.php?name=$url&url=$url&img_url=$img_url&preview_url=$preview_url\">";
       echo '<button class="go">';
       echo 'Download';
       echo '</button>';
