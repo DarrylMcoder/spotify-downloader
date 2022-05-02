@@ -105,12 +105,12 @@ foreach($json['tracks']['items'] as $item){
   $artists = trim($artists, ', ');
   $name = $artists .' - '. $item['name'];
   $img_url = $item['album']['images'][1]['url'];
-  $preview_url = isset($item['preview_url']) ? $item['preview_url'] : null;
+  $preview_url = isset($item['preview_url']) ? $item['preview_url'] : '';
   $url = $item['external_urls']['spotify'];
   echo '<div class="opts">';
     echo '<img class="img" width="250" height="250" src="'. $img_url .'">';
     echo '<p>'. $name .'</p>';
-    if(isset($preview_url)){
+    if($preview_url != ''){
       echo '<audio controls>';
         echo '<source src="'. $preview_url .'" type="audio/mpeg">';
       echo '</audio>';
