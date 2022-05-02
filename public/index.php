@@ -6,7 +6,6 @@ include('../src/functions.php');
 
 $q = isset($_GET['q']) ? $_GET['q'] : null;
 if(isset($q)){
-  crypt_enable('http://dstatic.darrylmcoder.com/assets/loading.html');
   $json = get_spotify_json($q);
 }
 
