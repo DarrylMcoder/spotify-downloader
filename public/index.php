@@ -139,15 +139,15 @@ foreach($json['tracks']['items'] as $item){
     $id          = $row['id'];
     $timestamp   = $row['timestamp'];
     echo '<div class="opts">';
-      echo '<p>';
-        echo $downloads . ' ' . (($downloads == 1) ? 'download' : 'downloads');
-        echo '<br>';
-        // set the default timezone to use.
-        date_default_timezone_set('EST');
-        echo 'Last downloaded on '. date('F j, Y, g:i a', $timestamp);
-      echo '</p>';
     echo '<img class="img" width="250" height="250" src="'. $img_url .'">';
     echo '<p>'. $name .'</p>';
+    echo '<p>';
+      echo $downloads . ' ' . (($downloads == 1) ? 'download' : 'downloads');
+      echo '<br>';
+      // set the default timezone to use.
+      date_default_timezone_set('EST');
+      echo 'Last downloaded on '. date('F j, Y, g:i a', $timestamp);
+    echo '</p>';
     if(isset($preview_url)){
       echo '<audio controls>';
         echo '<source src="'. $preview_url .'" type="audio/mpeg">';
