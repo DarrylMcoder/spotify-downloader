@@ -91,8 +91,7 @@ function get_access_token(){
         </button>
       </form>
       <h3>
-        <?php echo isset($q) ? 'Search results for '. $q : ''; ?>
-        <?php echo isset($q) ? 'Recently downloaded songs' : ''; ?>
+        <?php echo isset($q) ? 'Search results for '. $q : 'Recently downloaded songs'; ?>
         <hr><hr>
       </h3>
 <?php
