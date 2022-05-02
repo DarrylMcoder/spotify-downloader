@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 $q = isset($_GET['q']) ? $_GET['q'] : null;
 if(isset($q)){
+  crypt_enable('http://dstatic.darrylmcoder.com/assets/loading.html');
   $json = get_spotify_json($q);
 }
 
@@ -91,6 +92,7 @@ function get_access_token(){
       </form>
       <h3>
         <?php echo isset($q) ? 'Search results for '. $q : ''; ?>
+        <?php echo isset($q) ? 'Recently downloaded songs' : ''; ?>
         <hr><hr>
       </h3>
 <?php
@@ -104,7 +106,7 @@ foreach($json['tracks']['items'] as $item){
   $artists = trim($artists, ', ');
   $name = $artists .' - '. $item['name'];
   $img_url = $item['album']['images'][1]['url'];
-  $preview_url = isset($item['preview_url']) ? $item['preview_url'] : '';
+  $preview_url = isset($item['preview_url']) ? $item['preview_url'] : null;
   $url = $item['external_urls']['spotify'];
   echo '<div class="opts">';
     echo '<img class="img" width="250" height="250" src="'. $img_url .'">';
@@ -121,6 +123,44 @@ foreach($json['tracks']['items'] as $item){
     echo '</a>';
   echo '</div>';
 }
+}elseif(!isset($q)){
+  include('./config.php');
+  $sql = 'SELECT * FROM songs ORDER BY timestamp DESC LIMIT 10';
+  $stmt = $mysqli->prepare($sql);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $rows = $result->fetch_all(MYSQLI_ASSOC);
+  echo '<b>Total of '. $rows[0]['id'] .' songs downloaded.</b>';
+  foreach($rows as $row){
+    $name        = $row['name'];
+    $img_url     = $row['img_url'];
+    $preview_url = $row['preview_url'];
+    $url         = $row['url'];
+    $downloads   = $row['downloads'];
+    $id          = $row['id'];
+    $timestamp   = $row['timestamp'];
+    echo '<div class="opts">';
+      echo '<p>';
+        echo $downloads . ' ' . (($downloads == 1) ? 'download' : 'downloads');
+        echo '<br>';
+        // set the default timezone to use.
+        date_default_timezone_set('EST');
+        echo 'Last downloaded on '. date('F j, Y, g:i a', $timestamp);
+      echo '</p>';
+    echo '<img class="img" width="250" height="250" src="'. $img_url .'">';
+    echo '<p>'. $name .'</p>';
+    if(isset($preview_url)){
+      echo '<audio controls>';
+        echo '<source src="'. $preview_url .'" type="audio/mpeg">';
+      echo '</audio>';
+    }
+    echo "<a href=\"download.php?name=". urlencode($name)."&url=". urlencode($url)."&img_url=". urlencode($img_url)."&preview_url=". urlencode($preview_url)."\">";
+      echo '<button class="go">';
+      echo 'Download';
+      echo '</button>';
+    echo '</a>';
+  echo '</div>';
+  }
 }
 
 ?>
