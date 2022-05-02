@@ -2,6 +2,7 @@
 
 ini_set('error_reporting', E_ALL ^ E_NOTICE); 
 ini_set('display_errors', 1);
+include('../src/functions.php');
 
 $q = isset($_GET['q']) ? $_GET['q'] : null;
 if(isset($q)){
