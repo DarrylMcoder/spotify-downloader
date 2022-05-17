@@ -4,7 +4,7 @@ class SpotDL{
   
   public function download($spotifyUrl){
     $spotifyUrl = escapeshellcmd($spotifyUrl);
-    $cmd = 'python /app/spotdl/__main__.py -- '.$spotifyUrl.' -f - 1>&2';
+    $cmd = 'python /app/spotdl/__main__.py -- '.$spotifyUrl.' --output-file - 1>&2';
     $fp = popen($cmd,"r");
     while(!feof($fp)){
       echo fgets($fp, 4096);
