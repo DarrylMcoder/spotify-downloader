@@ -13,8 +13,9 @@ $preview_url = $_GET['preview_url'];
 $downloads = 1;
 $timestamp = time();
 
-$filename = $spotdl->download($url);
-header("Location: http://yt.app.darrylmcoder.com/download.php?n=$filename&url=http://spotdl.darrylmcoder.com/$filename");
+header("Content-disposition: attachment; filename=$name");
+header("Content-type: audio/mpeg");
+$spotdl->download($url);
 flush();
 include('./config.php');
 $sql = "INSERT INTO songs(artist, name, url, img_url, preview_url, downloads, timestamp) VALUES(?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE downloads = downloads + 1, timestamp = ?";
