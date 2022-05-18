@@ -22,7 +22,7 @@ $timestamp = time();
 $filename = $spotdl->download($url);
 $downloader = new VideoSaver();
 $downloader->setDownloadedFileName($filename);
-$downloader->download($filename);
+$downloader->download('http://'.$_SERVER['HTTP_HOST'].'/'.$filename);
 
 
 include('./config.php');
