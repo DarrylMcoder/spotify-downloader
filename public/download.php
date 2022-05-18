@@ -5,6 +5,8 @@ ini_set('display_errors', 1);
 
 //require('../vendor/autoload.php');
 require('../src/SpotDL.php');
+require('../src/DownloadStreamer.php');
+require('../src/YouTubeStreamer.php');
 $spotdl = new SpotDL();
 $name = $_GET['name'];
 $url = $_GET['url'];
@@ -13,16 +15,12 @@ $preview_url = $_GET['preview_url'];
 $downloads = 1;
 $timestamp = time();
 
-header("Content-disposition: attachment; filename=$name");
-flush();
 $filename = $spotdl->download($url);
-header("Content-type: audio/mpeg");
-flush();
-$fp = fopen($filename, "r");
-while(!feof($fp)){
-  echo fgets($fp, 4096);
-}
-fclose($fp);
+$downloader = new \YouTube\DownloadStreamer();
+$downloader->setDownloadedFileName($filename);
+$downloader->download($filename);
+
+
 include('./config.php');
 $sql = "INSERT INTO songs(artist, name, url, img_url, preview_url, downloads, timestamp) VALUES(?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE downloads = downloads + 1, timestamp = ?";
 $stmt = $mysqli->prepare($sql);
