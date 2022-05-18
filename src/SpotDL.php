@@ -6,7 +6,7 @@ class SpotDL{
     $spotifyUrl = escapeshellcmd($spotifyUrl);
     $output;
     $rescode;
-    $cmd = 'python /app/spotdl/__main__.py '.$spotifyUrl.' 1>&2';
+    $cmd = 'python /app/spotdl/__main__.py '.$spotifyUrl.' 2>&1';
     exec($cmd,$output,$rescode);
     return $this->parseMusicName($output[1]);
   }
