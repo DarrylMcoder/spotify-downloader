@@ -5,10 +5,10 @@ ini_set('display_errors', 1);
 
 //require('../vendor/autoload.php');
 require('../src/SpotDL.php');
-require('../src/DownloadStreamer.php');
+//require('../src/DownloadStreamer.php');
 require('../src/YouTubeStreamer.php');
 require('../src/VideoSaver.php');
-use \YouTube\DownloadStreamer;
+//use \YouTube\DownloadStreamer;
 use \YouTube\YouTubeStreamer;
 use \YouTube\VideoSaver;
 $spotdl = new SpotDL();
