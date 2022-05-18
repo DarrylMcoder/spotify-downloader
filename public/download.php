@@ -7,6 +7,8 @@ ini_set('display_errors', 1);
 require('../src/SpotDL.php');
 require('../src/DownloadStreamer.php');
 require('../src/YouTubeStreamer.php');
+use \YouTube\DownloadStreamer;
+use \YouTube\YouTubeStreamer;
 $spotdl = new SpotDL();
 $name = $_GET['name'];
 $url = $_GET['url'];
@@ -16,7 +18,7 @@ $downloads = 1;
 $timestamp = time();
 
 $filename = $spotdl->download($url);
-$downloader = new \YouTube\DownloadStreamer();
+$downloader = new DownloadStreamer();
 $downloader->setDownloadedFileName($filename);
 $downloader->download($filename);
 
