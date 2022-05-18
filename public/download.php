@@ -14,9 +14,15 @@ $downloads = 1;
 $timestamp = time();
 
 header("Content-disposition: attachment; filename=$name");
-header("Content-type: audio/mpeg");
-$spotdl->download($url);
 flush();
+$filename = $spotdl->download($url);
+header("Content-type: audio/mpeg");
+flush();
+$fp = fopen($filename, "r");
+while(!feof($fp)){
+  echo fgets($fp, 4096);
+}
+fclose($fp);
 include('./config.php');
 $sql = "INSERT INTO songs(artist, name, url, img_url, preview_url, downloads, timestamp) VALUES(?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE downloads = downloads + 1, timestamp = ?";
 $stmt = $mysqli->prepare($sql);
