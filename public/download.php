@@ -2,7 +2,7 @@
     
 ini_set('error_reporting', E_ALL ^ E_NOTICE); 
 ini_set('display_errors', 1);
-
+header("Test: test");
 //require('../vendor/autoload.php');
 require('../src/SpotDL.php');
 //require('../src/DownloadStreamer.php');
