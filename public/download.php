@@ -10,9 +10,10 @@ require('../src/VideoSaver.php');
 //use \YouTube\DownloadStreamer;
 use \YouTube\YouTubeStreamer;
 use \YouTube\VideoSaver;
-$spotdl = new SpotDL();/*
+$spotdl = new SpotDL();
 $name = $_GET['name'];
 $url = $_GET['url'];
+/*
 $img_url = $_GET['img_url'];
 $preview_url = $_GET['preview_url'];
 $downloads = 1;
