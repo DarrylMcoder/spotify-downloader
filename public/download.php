@@ -19,9 +19,11 @@ $preview_url = $_GET['preview_url'];
 $downloads = 1;
 $timestamp = time();
 
+header("Time1: ". time());
 $filename = $spotdl->download($url);
 $downloader = new VideoSaver();
 $downloader->setDownloadedFileName($filename);
+header("Time2: ". time());
 $downloader->download('http://'.$_SERVER['HTTP_HOST'].'/'.$filename);
 
 
