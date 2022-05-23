@@ -1,5 +1,7 @@
 <?PHP
     
+ini_set('error_reporting', E_ALL ^ E_NOTICE); 
+ini_set('display_errors', 1);
 require('../src/YouTubeStreamer.php');
 require('../src/VideoSaver.php');
 use \YouTube\YouTubeStreamer;
@@ -11,4 +13,4 @@ if(!isset($filename)){
 
 $downloader = new VideoSaver();
 $downloader->setDownloadedFileName($filename);
-$downloader->download('http://'.$_SERVER['HTTP_HOST'].'/'.$filename);
+$downloader->download('http://spotdl.darrylmcoder.com/'.$filename);
