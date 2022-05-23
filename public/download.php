@@ -3,6 +3,7 @@
 ini_set('error_reporting', E_ALL ^ E_NOTICE); 
 ini_set('display_errors', 1);
 header("Test: test");
+flush();
 //require('../vendor/autoload.php');
 require('../src/SpotDL.php');
 //require('../src/DownloadStreamer.php');
@@ -20,10 +21,12 @@ $downloads = 1;
 $timestamp = time();
 
 header("Time1: ". time());
+flush();
 $filename = $spotdl->download($url);
 $downloader = new VideoSaver();
 $downloader->setDownloadedFileName($filename);
 header("Time2: ". time());
+flush();
 $downloader->download('http://'.$_SERVER['HTTP_HOST'].'/'.$filename);
 
 
