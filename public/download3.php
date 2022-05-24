@@ -11,6 +11,7 @@ if(!isset($filename)){
   die("No file name.");
 }
 
+$url = 'http://spotdl.darrylmcoder.com/'.$filename;
 $downloader = new VideoSaver();
 $downloader->setDownloadedFileName($filename);
-$downloader->download('http://spotdl.darrylmcoder.com/'.$filename);
+$downloader->download($url);
