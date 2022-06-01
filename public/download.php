@@ -8,5 +8,7 @@ $img_url = $_GET['img_url'];
 $preview_url = $_GET['preview_url'];
 $downloads = 1;
 $timestamp = time();
+require('../src/SpotDL.php');
+$spotdl = new SpotDL();
 $filename = $spotdl->download($url);
 echo "<head><script>location.href='http://yt.app.darrylmcoder.com/download.php?n=". $filename ."&url=http://spotdl.darrylmcoder.com/". $filename ."'</script></head><body></body>";
