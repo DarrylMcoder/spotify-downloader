@@ -61,6 +61,7 @@ class YouTubeStreamer
 
     public function stream($url)
     {
+        $url  = str_replace(" ", "%20", $url);
         $this->url = $url;
         $ch = curl_init();
 
