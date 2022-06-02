@@ -102,10 +102,6 @@ function get_access_token(){
           Search
         </button>
       </form>
-      <h3>
-        <?php echo isset($q) ? 'Search results for '. $q : 'Recently downloaded songs'; ?>
-        <hr><hr>
-      </h3>
 <?php
 
 if(isset($q)){
@@ -170,7 +166,7 @@ foreach($json['tracks']['items'] as $item){
       date_default_timezone_set('EST');
       echo 'Last downloaded on '. date('F j, Y, g:i a', $timestamp);
     echo '</p>';
-    if(isset($preview_url)){
+    if(isset($preview_url) && $preview_url != ''){
       echo '<audio controls>';
         echo '<source src="'. $preview_url .'" type="audio/mpeg">';
       echo '</audio>';
