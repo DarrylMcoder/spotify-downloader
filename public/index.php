@@ -104,8 +104,6 @@ function get_access_token(){
       </form>
       <h3>
         <?php echo isset($q) ? 'Search results for '. $q : 'Recently downloaded songs'; ?>
-        <br>
-        <?php echo isset($offset) ? "Page ".$offset."." : ''; ?>
         <hr><hr>
       </h3>
 <?php
@@ -137,10 +135,15 @@ foreach($json['tracks']['items'] as $item){
   echo '</div>';
 }
   
-$prev = make_page_url($q,$offset - 10);
-$next = make_page_url($q,$offset + 10);
-echo '<a href="'. $prev .'">&lt;&lt;Previous  </a>';
-echo '<a href="'. $next .'">  Next&gt;&gt;</a>';
+  $prev = make_page_url($q,$offset - 10);
+  $next = make_page_url($q,$offset + 10);
+  if(($offset - 10) >= 0){
+    echo '<a href="'. $prev .'">&lt;&lt;Previous  </a>';
+  }
+  echo " | ";
+  if(($offset + 10) <= $json['tracks']['total']){
+    echo '<a href="'. $next .'">  Next&gt;&gt;</a>';
+  }
 }elseif(!isset($q)){
   include('./config.php');
   $sql = 'SELECT * FROM songs ORDER BY timestamp DESC LIMIT 10';
