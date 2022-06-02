@@ -5,12 +5,24 @@ ini_set('display_errors', 1);
 include('../src/functions.php');
 
 $q = isset($_GET['q']) ? $_GET['q'] : null;
+$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
+
 if(isset($q)){
-  $json = get_spotify_json($q);
+  $url = make_spotify_url($q,$offset);
+  $json = get_spotify_json($url);
 }
 
-function get_spotify_json($q){
-  $url = 'https://api.spotify.com/v1/search?q='.urlencode($q).'&type=track&market=ES&limit=10';
+function make_page_url($q, $offset = 0){
+  $url = 'http://spotdl.darrylmcoder.com?q='.urlencode($q).'&offset='.$offset;
+  return $url;
+}
+
+function make_spotify_url($q, $offset = 0){
+  $url = 'https://api.spotify.com/v1/search?q='.urlencode($q).'&type=track&market=ES&limit=10&offset='.$offset;
+  return $url;
+}
+
+function get_spotify_json($url){
   $access_token = get_access_token();
   $headers = [
     "Accept: application/json",
@@ -92,6 +104,8 @@ function get_access_token(){
       </form>
       <h3>
         <?php echo isset($q) ? 'Search results for '. $q : 'Recently downloaded songs'; ?>
+        <br>
+        <?php echo isset($offset) ? "Page ".$offset."." : ''; ?>
         <hr><hr>
       </h3>
 <?php
@@ -122,6 +136,11 @@ foreach($json['tracks']['items'] as $item){
     echo '</a>';
   echo '</div>';
 }
+  
+$prev = make_page_url($q,$offset - 10);
+$next = make_page_url($q,$offset + 10);
+echo '<a href="'. $prev .'">&lt;&lt;Previous  </a>';
+echo '<a href="'. $next .'">  Next&gt;&gt;</a>';
 }elseif(!isset($q)){
   include('./config.php');
   $sql = 'SELECT * FROM songs ORDER BY timestamp DESC LIMIT 10';
