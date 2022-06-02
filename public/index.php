@@ -102,6 +102,7 @@ function get_access_token(){
           Search
         </button>
       </form>
+      <br><br>
 <?php
 
 if(isset($q)){
