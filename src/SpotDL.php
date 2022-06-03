@@ -13,6 +13,7 @@ class SpotDL{
 
   private function parseMusicName($str){
     preg_match('#"([^"]+)"#',$str,$res);
+    error_log(json_encode($res));
     $name = $res[1].'.mp3';
     return $name;
   }
