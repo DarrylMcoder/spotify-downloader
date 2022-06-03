@@ -8,6 +8,7 @@ class SpotDL{
     $rescode;
     $cmd = 'python /app/spotdl/__main__.py '.$spotifyUrl.' 2>&1';
     exec($cmd,$output,$rescode);
+    error_log(json_encode($output));
     return $this->parseMusicName($output[1]);
   }
 
