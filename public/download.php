@@ -8,7 +8,6 @@ require('../src/VideoSaver.php');
 use \YouTube\YouTubeStreamer;
 use \YouTube\VideoSaver;
 
-$artist = '';
 $name = $_GET['name'];
 $url = $_GET['url'];
 $img_url = $_GET['img_url'];
@@ -20,14 +19,14 @@ $spotdl = new SpotDL();
 $filename = $spotdl->download($url);
 
 
-$url = 'http://spotdl.darrylmcoder.com/'.$filename;
+$file_url = 'http://spotdl.darrylmcoder.com/'.$filename;
 $downloader = new VideoSaver();
 $downloader->setDownloadedFileName($filename);
-$downloader->download($url);
+$downloader->download($file_url);
 
 include('./config.php');
-$sql = "INSERT INTO songs(artist, name, url, img_url, preview_url, downloads, timestamp) VALUES(?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE downloads = downloads + 1, timestamp = ?";
+$sql = "INSERT INTO songs(name, url, img_url, preview_url, downloads, timestamp) VALUES(?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE downloads = downloads + 1, timestamp = ?";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param('sssssiii',$artist, $name, $url, $img_url, $preview_url, $downloads, $timestamp, $timestamp);
+$stmt->bind_param('ssssiii',$name, $url, $img_url, $preview_url, $downloads, $timestamp, $timestamp);
 $stmt->execute();
 //echo $mysqli->error;
