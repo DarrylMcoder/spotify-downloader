@@ -25,7 +25,7 @@ $downloader->setDownloadedFileName($filename);
 $downloader->download($file_url);
 
 include('./config.php');
-$sql = "INSERT INTO songs(name, url, img_url, preview_url, downloads, timestamp) VALUES(?,?,?,?,?,?,?) ON DUPLICATE KEY UPDATE downloads = downloads + 1, timestamp = ?";
+$sql = "INSERT INTO songs(name, url, img_url, preview_url, downloads, timestamp) VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE downloads = downloads + 1, timestamp = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param('ssssiii',$name, $url, $img_url, $preview_url, $downloads, $timestamp, $timestamp);
 $stmt->execute();
