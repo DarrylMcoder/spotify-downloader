@@ -63,8 +63,10 @@ function get_access_token(){
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Mp3 Music Downloader</title>
     <meta name="viewport" content="width=320, initial-scale=1">
     <meta charset="utf-8">
+    <meta name="description" content="DarrylMcoder's Music Downloader, Search and download any song as mp3">
     <style>
       body, html {
         min-width: 100%;
