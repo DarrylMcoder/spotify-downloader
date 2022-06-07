@@ -146,13 +146,13 @@ foreach($json['tracks']['items'] as $item){
 }elseif(!isset($q)){
   include('./config.php');
   //get total songs downloaded
-  $sql = 'SELECT COUNT(id) FROM songs';
+  $sql = 'SELECT SUM(downloads) FROM songs';
   $stmt = $mysqli->prepare($sql);
   $stmt->execute();
   $result = $stmt->get_result();
   $rows = $result->fetch_all(MYSQLI_ASSOC);
   error_log(json_encode($rows));
-  echo '<b>Total of '. $rows[0] .' songs downloaded.</b>';
+  echo '<b>Total of '. $rows[0]['SUM(downloads)'] .' songs downloaded.</b>';
   
   //get 10 recent downloads
   $sql = 'SELECT * FROM songs ORDER BY timestamp DESC LIMIT 10';
