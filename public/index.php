@@ -151,6 +151,7 @@ foreach($json['tracks']['items'] as $item){
   $stmt->execute();
   $result = $stmt->get_result();
   $rows = $result->fetch_all(MYSQLI_ASSOC);
+  error_log(json_encode($rows));
   echo '<b>Total of '. $rows[0] .' songs downloaded.</b>';
   
   //get 10 recent downloads
